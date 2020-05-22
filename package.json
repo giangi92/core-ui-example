@@ -37,8 +37,7 @@
     "serve": "^11.3.0",
     "simple-line-icons": "^2.4.1"
   },
-  "devDependencies": {
-  },
+  
   "scripts": {
     "react-scripts": "^3.4.1",
     "start": "react-scripts start",
