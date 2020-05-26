@@ -7,9 +7,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ExampleContainer from './CoreUITest';
+// import ExampleContainer from './CoreUITest';
+import CoreUserInterface from './components/CoreUserInterface'
 
-ReactDOM.render(<ExampleContainer />, document.getElementById('root'));
+ReactDOM.render(<CoreUserInterface />, document.getElementById('root'));
 // ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

@@ -3,6 +3,7 @@ import { Button, Card, CardBody, CardHeader, Modal, ModalBody, ModalFooter, Moda
 import { Line } from 'react-chartjs-2';
 import image from './assets/img/brand/sygnet.svg';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+//import DataRetriever from './components/DataRetriever';
 
 class PopoverItem extends Component {
     constructor(props) {
@@ -202,104 +203,104 @@ const ExampleContainer = () => {
 
                         <div style={{ marginTop: 80 + 'px' }, { marginBottom: 80 + 'px' }}></div>{/*<!-- spazio -->*/}
 
-                        <div class="alert alert-primary" role="alert">
+                        <div className="alert alert-primary" role="alert">
                             It's primary alert!
                         </div>
-                        <div class="alert alert-secondary" role="alert">
+                        <div className="alert alert-secondary" role="alert">
                             It's secondary alert!
                         </div>
-                        <div class="alert alert-success" role="alert">
+                        <div className="alert alert-success" role="alert">
                             It's success alert!
                         </div>
-                        <div class="alert alert-danger" role="alert">
+                        <div className="alert alert-danger" role="alert">
                             It's danger alert!
                         </div>
-                        <div class="alert alert-warning" role="alert">
+                        <div className="alert alert-warning" role="alert">
                             It's warning alert!
                         </div>
-                        <div class="alert alert-info" role="alert">
+                        <div className="alert alert-info" role="alert">
                             It's info alert!
                         </div>
-                        <div class="alert alert-light" role="alert">
+                        <div className="alert alert-light" role="alert">
                             It's light alert!
                         </div>
-                        <div class="alert alert-dark" role="alert">
+                        <div className="alert alert-dark" role="alert">
                             It's dark alert!
                         </div>
 
-                        <div class="alert alert-success" role="alert">
-                            <h4 class="alert-heading">Well done!</h4>
+                        <div className="alert alert-success" role="alert">
+                            <h4 className="alert-heading">Well done!</h4>
                             <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
                             <hr></hr>
-                            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                            <p className="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
                         </div>
 
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div className="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
 
-                        <button type="button" class="btn btn-primary">
-                            Notifications <span class="badge badge-light">4</span>
+                        <button type="button" className="btn btn-primary">
+                            Notifications <span className="badge badge-light">4</span>
                         </button>
 
-                        <span class="badge badge-primary">Primary</span>
-                        <span class="badge badge-secondary">Secondary</span>
-                        <span class="badge badge-success">Success</span>
-                        <span class="badge badge-danger">Danger</span>
-                        <span class="badge badge-warning">Warning</span>
-                        <span class="badge badge-info">Info</span>
-                        <span class="badge badge-light">Light</span>
-                        <span class="badge badge-dark">Dark</span>
+                        <span className="badge badge-primary">Primary</span>
+                        <span className="badge badge-secondary">Secondary</span>
+                        <span className="badge badge-success">Success</span>
+                        <span className="badge badge-danger">Danger</span>
+                        <span className="badge badge-warning">Warning</span>
+                        <span className="badge badge-info">Info</span>
+                        <span className="badge badge-light">Light</span>
+                        <span className="badge badge-dark">Dark</span>
 
                         {/**callout */}
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <div class="callout callout-info">
-                                    <small class="text-muted">New Clients</small><br />
-                                    <strong class="h4">9,123</strong>
+                        <div className="row">
+                            <div className="col-sm-2">
+                                <div className="callout callout-info">
+                                    <small className="text-muted">New Clients</small><br />
+                                    <strong className="h4">9,123</strong>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
-                                <div class="callout callout-danger">
-                                    <small class="text-muted">Recuring Clients</small><br />
-                                    <strong class="h4">22,643</strong>
+                            <div className="col-sm-2">
+                                <div className="callout callout-danger">
+                                    <small className="text-muted">Recuring Clients</small><br />
+                                    <strong className="h4">22,643</strong>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
-                                <div class="callout callout-warning">
-                                    <small class="text-muted">Pageviews</small><br />
-                                    <strong class="h4">78,623</strong>
+                            <div className="col-sm-2">
+                                <div className="callout callout-warning">
+                                    <small className="text-muted">Pageviews</small><br />
+                                    <strong className="h4">78,623</strong>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
-                                <div class="callout callout-success">
-                                    <small class="text-muted">Organic</small><br />
-                                    <strong class="h4">49,123</strong>
+                            <div className="col-sm-2">
+                                <div className="callout callout-success">
+                                    <small className="text-muted">Organic</small><br />
+                                    <strong className="h4">49,123</strong>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
-                                <div class="callout">
-                                    <small class="text-muted">CTR</small><br />
-                                    <strong class="h4">23%</strong>
+                            <div className="col-sm-2">
+                                <div className="callout">
+                                    <small className="text-muted">CTR</small><br />
+                                    <strong className="h4">23%</strong>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
-                                <div class="callout callout-primary">
-                                    <small class="text-muted">Bounce Rate</small><br />
-                                    <strong class="h4">5%</strong>
+                            <div className="col-sm-2">
+                                <div className="callout callout-primary">
+                                    <small className="text-muted">Bounce Rate</small><br />
+                                    <strong className="h4">5%</strong>
                                 </div>
                             </div>
                         </div>
                         {/** card */}
-                        <div class="card" style={{ width: 18 + 'rem' }}>
-                            <img class="card-img-top" src={image} alt="Card cap" />
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <div className="card" style={{ width: 18 + 'rem' }}>
+                            <img className="card-img-top" src={image} alt="Card cap" />
+                            <div className="card-body">
+                                <h5 className="card-title">Card title</h5>
+                                <p className="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
+                                <a href="#" className="btn btn-primary">Go somewhere</a>
                             </div>
                         </div>
 
