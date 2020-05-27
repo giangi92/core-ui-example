@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BodyContent from './BodyContent';
+import BodyContent from './Employees';
 import Header from './Header';
 import Navigation from './Navigation';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';

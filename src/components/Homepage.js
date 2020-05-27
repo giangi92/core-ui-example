@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import LineChart from './LineChart';
 import PopoverItem from './PopoverItem';
 import AlertSuccess from './AlertSuccess';
+import CarsGrid from './CarsGrid';
 
 const Homepage = () => {
     const [notificationNumb, setNotificationNumber] = useState(0);
@@ -77,7 +78,10 @@ const Homepage = () => {
                     text: 'Mostra Successo!',
                 }} successAlertFunc = {setSuccessMessage} showSuccessAlert={successMessage} id={1}></PopoverItem>
             </div>
-
+            <hr></hr>
+            <br></br>
+            <h3>Le tue auto personali</h3>
+            <CarsGrid></CarsGrid>
         </div>
     )
 }

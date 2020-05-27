@@ -8,7 +8,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import ExampleContainer from './CoreUITest';
-import CoreUserInterface from './components/CoreUserInterface'
+import CoreUserInterface from './components/Main'
 import CoreUITest from './CoreUITest';
 
 // ReactDOM.render(<CoreUITest />, document.getElementById('root'));

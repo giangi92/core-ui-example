@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import EmployeeCard from './EmployeeCard';
 import LoadingPopup from './LoadingPopup';
 import ChartModal from './ChartModal';
+import CarsGrid from './CarsGrid';
 
 const BodyContent = () => {
     const [employeeData, setEmployeeData] = useState(undefined);
