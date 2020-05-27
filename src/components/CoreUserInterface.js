@@ -18,10 +18,10 @@ class CoreUserInterface extends Component {
                         </header>
 
                         <div className="app-body">
-                            <div className="sidebar">
-                                {/* <Navigation /> */}
-                                <Sidebar></Sidebar>
-                            </div>
+                            {/* <div className="sidebar">
+                                { <Navigation /> }
+                                 <Sidebar></Sidebar>
+                            </div> */}
                             <main className="main space-allaround">
                                 {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
