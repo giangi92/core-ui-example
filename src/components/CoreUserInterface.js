@@ -4,6 +4,7 @@ import Header from './Header';
 import Navigation from './Navigation';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import About from './About';
+import Homepage from './Homepage';
 
 class CoreUserInterface extends Component {
     render() {
@@ -15,10 +16,10 @@ class CoreUserInterface extends Component {
                             <Header />
                         </header>
                         <div className="app-body">
-                            <div className="sidebar">
+                            {/* <div className="sidebar">
                                 <Navigation />
-                            </div>
-                            <main className="main">
+                            </div> */}
+                            <main className="main space-allaround">
                                 {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
 
@@ -30,7 +31,7 @@ class CoreUserInterface extends Component {
                                         <BodyContent />
                                     </Route>
                                     <Route path="/">
-                                        <p>Home page vuota, lul!</p>
+                                        <Homepage></Homepage>
                                     </Route>
                                 </Switch>
 

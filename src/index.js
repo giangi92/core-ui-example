@@ -9,7 +9,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import ExampleContainer from './CoreUITest';
 import CoreUserInterface from './components/CoreUserInterface'
+import CoreUITest from './CoreUITest';
 
+// ReactDOM.render(<CoreUITest />, document.getElementById('root'));
 ReactDOM.render(<CoreUserInterface />, document.getElementById('root'));
 // ReactDOM.render(<App />, document.getElementById('root'));
 

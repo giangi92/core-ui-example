@@ -3,3 +3,23 @@
 .little-spacing {
     margin-left: 10px;
 }
+
+.max-dimensions-small {
+    max-width: 200px;
+    max-height: 180px;
+}
+
+.max-dimensions-medium {
+    max-width: 400px;
+    max-height: 280px;
+}
+
+.center-element {
+    margin: auto;
+    display: block;
+    position: absolute;
+}
+
+.space-allaround{
+    margin: 20px
+}
