@@ -28,6 +28,7 @@
     "flag-icon-css": "^3.4.6",
     "font-awesome": "^4.7.0",
     "got": "^11.1.4",
+    "mongoose": "^5.9.16",
     "mongose": "0.0.2-security",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
@@ -41,7 +42,8 @@
     "react-test-renderer": "^16.13.1",
     "reactstrap": "^8.4.1",
     "serve": "^11.3.0",
-    "simple-line-icons": "^2.4.1"
+    "simple-line-icons": "^2.4.1",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "react-scripts": "^3.4.1"

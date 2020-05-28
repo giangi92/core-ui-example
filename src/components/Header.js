@@ -13,7 +13,7 @@ const Header = () => {
             <AppNavbarBrand full={{ src: logo, width: 89, height: 25, alt: 'CoreUI Logo' }}
                 minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}>
 
-                <h2 class="little-spacing">Giangisoft</h2>
+                <h2 className="little-spacing">Giangisoft</h2>
 
             </AppNavbarBrand>
             <Nav className="d-md-down-none" navbar>
