@@ -12,7 +12,7 @@ class CoreUserInterface extends Component {
         return (
             <div>
                 <Router>
-                    <div className="app sidebar-show aside-menu-show">
+                    <div className="app">
                         <header className="app-header navbar">
                             <Header />
                         </header>

@@ -39,25 +39,27 @@ const BodyContent = () => {
         const [users, setUsers] = useState([]);
 
         const columnDefs = [{
-            headerName: "Name", field: "name", sortable: true, filter: true, checkboxSelection: true
+            headerName: "Name", field: "name", sortable: true, filter: true, checkboxSelection: true, editable: true
         }, {
-            headerName: "Email", field: "email", sortable: true, filter: true
+            headerName: "Email", field: "email", sortable: true, filter: true, editable: true
         }, {
-            headerName: "Salary", field: "salary", sortable: true, filter: true
+            headerName: "Salary", field: "salary", sortable: true, filter: true, editable: true
         }, {
-            headerName: "Da licenziare?", field: "firedable", sortable: true, filter: true
+            headerName: "Da licenziare?", field: "firedable", sortable: true, filter: true, editable: true
         }];
 
-        useEffect(()=>{
+        useEffect(() => {
             fetch('/employees')
-            .then(result => result.json()).then((employees)=>{ 
-                setUsers(employees)});
-        },[users])
+                .then(result => result.json()).then((employees) => {
+
+                    setUsers(employees)
+                })
+        }, [])
 
         return (
             <div className="ag-theme-material"
                 style={{
-                    height: '250px',
+                    height: '500px',
                     width: '100%'
                 }}>
                 <AgGridReact
@@ -70,6 +72,21 @@ const BodyContent = () => {
                     rowData={users}
                     rowSelection="multiple"
                     onGridReady={params => gridApi = params.api}
+                    onCellValueChanged={((field) => {
+
+                        console.log("campo modificato:", field.data);
+
+                        fetch("/employees/update",
+                            {
+                                method: "POST",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(field.data)
+                            })
+                            .then(function (res) { return res.json(); })
+                            .then(function (data) { console.log(data) })
+                    })}
                 >
                 </AgGridReact>
             </div>
