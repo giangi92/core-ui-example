@@ -3,6 +3,7 @@ import BodyContent from './Employees';
 import Header from './Header';
 import Navigation from './Navigation';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import * as router from 'react-router-dom';
 import About from './About';
 import Homepage from './Homepage';
 import Sidebar from './Sidebar';
@@ -35,7 +36,7 @@ const navigation =
             icon: 'icon-user',
             badge: {
                 variant: 'info'
-                
+
             },
         },
         {
@@ -52,7 +53,7 @@ const navigation =
             url: '/about',
             icon: 'icon-settings',
             badge: {
-               
+
                 text: 'VECCHIO',
             },
         }
@@ -78,7 +79,7 @@ class CoreUserInterface extends Component {
                                 <AppSidebarHeader />
                                 <AppSidebarForm />
                                 <Suspense>
-                                    <AppSidebarNav navConfig={navigation} />
+                                    <AppSidebarNav navConfig={navigation} router={router} />
                                 </Suspense>
                                 <AppSidebarFooter />
                                 <AppSidebarMinimizer />

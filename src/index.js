@@ -12,8 +12,7 @@ import CoreUserInterface from './components/Main'
 import CoreUITest from './CoreUITest';
 
 // ReactDOM.render(<CoreUITest />, document.getElementById('root'));
-const pathname = 'cicciocappuccio'
-ReactDOM.render(<CoreUserInterface location={pathname} />, document.getElementById('root'));
+ReactDOM.render(<CoreUserInterface />, document.getElementById('root'));
 // ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
