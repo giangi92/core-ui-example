@@ -71,6 +71,8 @@ const BodyContent = () => {
                     }}
                     rowData={users}
                     rowSelection="multiple"
+                    pagination={true}
+                    paginationPageSize={10}
                     onGridReady={params => gridApi = params.api}
                     onCellValueChanged={((field) => {
 
