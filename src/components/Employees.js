@@ -49,7 +49,13 @@ const BodyContent = () => {
         }];
 
         useEffect(() => {
-            fetch('/employees')
+            fetch('/employees', {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNpY2Npb2NhcHB1Y2Npb0BnaWFuZ2lzb2Z0LmNvbSIsImlhdCI6MTU5MTM3MzY5OSwiZXhwIjoxNTkxMzk4ODk5fQ.JaCifqlV46yeT5BjsRxayqdXSYO1pk2fP2EknjKehQo'
+                }
+            })
                 .then(result => result.json()).then((employees) => {
 
                     setUsers(employees)

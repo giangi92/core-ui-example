@@ -8,15 +8,16 @@ import sygnet from '../assets/img/brand/sygnet.svg'
 
 const Header = () => {
     return (
-        <div>
+        <React.Fragment>
             <AppSidebarToggler className="d-lg-none" display="md" mobile />
-            <AppNavbarBrand full={{ src: logo, width: 89, height: 25, alt: 'CoreUI Logo' }}
-                minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}>
+            {/* <AppNavbarBrand>
 
-                <h2 className="little-spacing">Giangisoft</h2>
 
-            </AppNavbarBrand>
-            <Nav className="d-md-down-none" navbar>
+            </AppNavbarBrand> */}
+
+            <h2 className="little-spacing">Giangisoft</h2>
+
+            <Nav className="ml-auto" navbar>
                 <NavItem className="px-3">
                     <Link to="/" className="nav-link" >Dashboard</Link>
                 </NavItem>
@@ -29,12 +30,21 @@ const Header = () => {
                 <NavItem className="px-3">
                     <Link to="#" className="nav-link">Settings</Link>
                 </NavItem>
+
+                <UncontrolledDropdown nav direction="down">
+                    <DropdownToggle nav>
+                        <img src={'../../assets/img/avatars/100.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                        <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Logout</DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
             </Nav>
 
             {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}
 
 
-        </div>
+        </React.Fragment>
     )
 }
 

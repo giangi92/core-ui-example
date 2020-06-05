@@ -1,18 +1,19 @@
 import React, { Component, Suspense } from 'react';
 import BodyContent from './Employees';
 import Header from './Header';
-import Navigation from './Navigation';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import About from './About';
 import Homepage from './Homepage';
-import Sidebar from './Sidebar';
+import UserLogin from './UserLogin';
 import {
+    AppHeader,
     AppSidebar,
     AppSidebarFooter,
     AppSidebarForm,
     AppSidebarHeader,
     AppSidebarMinimizer,
+    AppFooter,
     AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 
@@ -63,49 +64,67 @@ const navigation =
 class CoreUserInterface extends Component {
     render() {
         return (
-            <div>
+            <div className="app">
                 <Router>
-                    <div className="app">
-                        <header className="app-header navbar">
+                    <Switch>
+                        <Route path="/login">
+                            <UserLogin />
+                        </Route>
+                        
+                        <div>
+                            {/* <header className="app-header navbar">
                             <Header />
-                        </header>
+                        </header> */}
+                            <AppHeader fixed>
+                                <Suspense>
+                                    <Header />
+                                </Suspense>
+                            </AppHeader>
 
-                        <div className="app-body">
-                            {/* <div className="sidebar">
+                            <div className="app-body">
+                                {/* <div className="sidebar">
                                 { <Navigation /> }
                                  <Sidebar></Sidebar>
                             </div> */}
-                            <AppSidebar fixed display="lg">
-                                <AppSidebarHeader />
-                                <AppSidebarForm />
-                                <Suspense>
-                                    <AppSidebarNav navConfig={navigation} router={router} />
-                                </Suspense>
-                                <AppSidebarFooter />
-                                <AppSidebarMinimizer />
-                            </AppSidebar>
-                            <main className="main space-allaround">
-                                {/* A <Switch> looks through its children <Route>s and
+                                <AppSidebar fixed display="lg">
+                                    <AppSidebarHeader />
+                                    <AppSidebarForm />
+                                    <Suspense>
+                                        <AppSidebarNav navConfig={navigation} router={router} />
+                                    </Suspense>
+                                    <AppSidebarFooter />
+                                    <AppSidebarMinimizer />
+                                </AppSidebar>
+                                <main className="main space-allaround">
+                                    {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
 
-                                <Switch>
+
                                     <Route path="/about">
                                         <About></About>
                                     </Route>
                                     <Route path="/users">
                                         <BodyContent />
                                     </Route>
+
                                     <Route path="/">
                                         <Homepage></Homepage>
                                     </Route>
-                                </Switch>
 
-                            </main>
+                                </main>
 
+                            </div>
+
+                            <AppFooter>
+                                <Suspense>
+                                    Giangisoft® - All rights reserved
+                            </Suspense>
+                            </AppFooter>
+                            {/* <footer className="app-footer">
+                            Giangisoft® - All rights reserved
+                        </footer> */}
                         </div>
-                        <footer className="app-footer">
-                        </footer>
-                    </div>
+                    </Switch>
                 </Router>
             </div>
         )
