@@ -107,7 +107,7 @@ class CoreUserInterface extends Component {
                                         <BodyContent />
                                     </Route>
 
-                                    <Route path="/">
+                                    <Route path="/dashboard">
                                         <Homepage></Homepage>
                                     </Route>
 
