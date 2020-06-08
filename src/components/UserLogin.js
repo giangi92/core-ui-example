@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
+import { Link, Redirect } from 'react-router-dom';
+import User from '../models/User';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
 const UserLogin = () => {
@@ -8,6 +8,9 @@ const UserLogin = () => {
     const [validEmail, setValidEmail] = useState(true);
     const [goToDashboard, setGoToDashboard] = useState(false);
     var [password, setPassword] = useState('');
+
+    // if(sessionToken && jwt.verify(sessionToken))
+    //  return(<Redirect to='/dasboard'></Redirect>)
 
     const submitCredentials = (e) => {
         e.preventDefault();
@@ -28,17 +31,20 @@ const UserLogin = () => {
                 if (data.error) {
                     setValidEmail(false);
                     console.log('email inserita non valida validEmail:', validEmail)
+                } else {
+                    localStorage.setItem('sessionToken', data.sessionToken);
+                    console.log(data);
+                    const user = new User(data);
+                    localStorage.setItem('user', user);
+                    setGoToDashboard(true);
+                    // console.log(localStorage.getItem("sessionToken"));
                 }
-                localStorage.setItem('sessionToken', data.sessionToken);
-                console.log(data);
-                setGoToDashboard(true);
-                // console.log(localStorage.getItem("sessionToken"));
             })
     }
     if (goToDashboard) {
         return (
             <div>
-                <Link to="/" />
+                <Redirect to="/dashboard" />
             </div>
         )
     } else
@@ -47,6 +53,13 @@ const UserLogin = () => {
                 <div className='d-flex justify-content-center align-items-center space-allaround'>
                     <h1 className='display-1'>Giangisoft</h1>
                 </div>
+                <p className="center-element">Hai accesso per 20 secondi, dopo di che ritorni qui nella home
+                        <br></br>
+                        Tra i difetti c'è il fatto che l'avatar si aggiorna solo con un refresh completo della pagina.
+                        <br/>
+                        account di prova: cicciocappuccio@giangisoft.com <br />
+                        pass:password
+                    </p>
                 <div className="app flex-row align-items-center">
                     <Container>
                         <Row className="justify-content-center">

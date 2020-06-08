@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import BodyContent from './Employees';
 import Header from './Header';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
@@ -6,7 +6,7 @@ import * as router from 'react-router-dom';
 import About from './About';
 import Homepage from './Homepage';
 import UserLogin from './UserLogin';
-import jwt from 'jsonwebtoken';
+import { Redirect } from 'react-router';
 import {
     AppHeader,
     AppSidebar,
@@ -17,6 +17,9 @@ import {
     AppFooter,
     AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
+import TokenCheckerRedirect, { TokenChecker } from './TokenChecker';
+import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+
 
 // sidebar nav config
 
@@ -25,7 +28,7 @@ const navigation =
     items: [
         {
             name: 'Dashboard',
-            url: '/',
+            url: '/dashboard',
             icon: 'icon-speedometer',
             badge: {
                 variant: 'success',
@@ -62,80 +65,118 @@ const navigation =
     ]
 }
 
-class CoreUserInterface extends Component {
+const CoreUserInterface = () => {
 
-    render() {
+    const [logged, setLogged] = useState(false);
 
-        const sessionStatus = localStorage.getItem('sessionToken');
-        // console.log('Stato della sessione', jwt.verify(sessionStatus));
+    useEffect(() => {
+        console.log('update del main!!!!');
+        const user = localStorage.getItem('user') || undefined;
+        const isCorrect = TokenChecker();
 
+        setLogged(user && isCorrect);
+    })
 
-        return (
-            <div className="app">
-                <Router>
-                    {/* {!sessionStatus || (sessionStatus && jwt.verify(sessionStatus))}
-                    <Link to='/login'>
-                    </Link> */}
-                    {/* <Route path="/login">
+    return (
+        <div className="app">
+            <Router>
+                {/* {!sessionStatus || (sessionStatus && jwt.verify(sessionStatus))}
+                    <Redirect to='/login'></Redirect> */}
+                {/* <Route path="/login">
                             <UserLogin />
                         </Route> */}
 
-                    <div>
-                        {/* <header className="app-header navbar">
+                <div>
+                    {/* <header className="app-header navbar">
                             <Header />
                         </header> */}
-                        <AppHeader fixed>
-                            <Suspense>
-                                <Header />
-                            </Suspense>
-                        </AppHeader>
+                    <AppHeader fixed>
+                        <Suspense>
+                            <Header />
+                            {/* <React.Fragment>
+                                <UncontrolledDropdown nav direction="down">
+                                    <DropdownToggle nav>
+                                        <img src={'../../assets/img/avatars/100.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Logout</DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </React.Fragment> */}
+                            {logged ?
+                                <UncontrolledDropdown nav direction="down">
+                                    <DropdownToggle nav>
+                                        <img src={'../../assets/img/avatars/100.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Logout</DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                :
+                                <UncontrolledDropdown nav direction="down">
+                                    <DropdownToggle nav>
+                                        <img src={'../../assets/img/avatars/0.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Login</DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            }
+                        </Suspense>
+                    </AppHeader>
 
-                        <div className="app-body">
-                            {/* <div className="sidebar">
+                    <div className="app-body">
+                        {/* <div className="sidebar">
                                 { <Navigation /> }
                                  <Sidebar></Sidebar>
                             </div> */}
-                            <AppSidebar fixed display="lg">
-                                <AppSidebarHeader />
-                                <AppSidebarForm />
-                                <Suspense>
-                                    <AppSidebarNav navConfig={navigation} router={router} />
-                                </Suspense>
-                                <AppSidebarFooter />
-                                <AppSidebarMinimizer />
-                            </AppSidebar>
-                            <main className="main space-allaround">
-                                {/* A <Switch> looks through its children <Route>s and
+                        <AppSidebar fixed display="lg">
+                            <AppSidebarHeader />
+                            <AppSidebarForm />
+                            <Suspense>
+                                <AppSidebarNav navConfig={navigation} router={router} />
+                            </Suspense>
+                            <AppSidebarFooter />
+                            <AppSidebarMinimizer />
+                        </AppSidebar>
+                        <main className="main space-allaround">
+                            {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-                                <Switch>
+                            <Switch>
 
-                                    <Route path="/about">
-                                        <About></About>
-                                    </Route>
-                                    <Route path="/users">
-                                        <BodyContent />
-                                    </Route>
-                                    <Route path="/">
-                                        <Homepage></Homepage>
-                                    </Route>
+                                <Route path="/about">
+                                    <About></About>
+                                </Route>
+                                <Route path="/users">
+                                    <TokenCheckerRedirect uri="users"></TokenCheckerRedirect>
+                                    <BodyContent />
+                                </Route>
 
-                                </Switch>
-                            </main>
-                        </div>
+                                <Route path="/dashboard">
+                                    <TokenCheckerRedirect uri="dashboard"></TokenCheckerRedirect>
+                                    <Homepage></Homepage>
+                                    {/* {setLogged(true)} */}
+                                </Route>
+                                <Route path="/">
+                                    <UserLogin />
+                                </Route>
 
-                        <footer className="app-footer">
-                            Giangisoft® - All rights reserved
+                            </Switch>
+                        </main>
+                    </div>
+
+                    <footer className="app-footer">
+                        Giangisoft® - All rights reserved
                         </footer>
-                        {/* <AppFooter>
+                    {/* <AppFooter>
                                 <Suspense>
                                     Giangisoft® - All rights reserved
                                     </Suspense>
                             </AppFooter> */}
-                    </div>
-                </Router>
-            </div>
-        )
-    }
+                </div>
+            </Router>
+        </div>
+    )
 }
 
 export default CoreUserInterface;
