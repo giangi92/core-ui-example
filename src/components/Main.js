@@ -1,11 +1,12 @@
 import React, { Component, Suspense } from 'react';
 import BodyContent from './Employees';
 import Header from './Header';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import About from './About';
 import Homepage from './Homepage';
 import UserLogin from './UserLogin';
+import jwt from 'jsonwebtoken';
 import {
     AppHeader,
     AppSidebar,
@@ -24,7 +25,7 @@ const navigation =
     items: [
         {
             name: 'Dashboard',
-            url: '/dashboard',
+            url: '/',
             icon: 'icon-speedometer',
             badge: {
                 variant: 'success',
@@ -62,43 +63,51 @@ const navigation =
 }
 
 class CoreUserInterface extends Component {
+
     render() {
+
+        const sessionStatus = localStorage.getItem('sessionToken');
+        // console.log('Stato della sessione', jwt.verify(sessionStatus));
+
+
         return (
             <div className="app">
                 <Router>
-                    <Switch>
-                        <Route path="/login">
+                    {/* {!sessionStatus || (sessionStatus && jwt.verify(sessionStatus))}
+                    <Link to='/login'>
+                    </Link> */}
+                    {/* <Route path="/login">
                             <UserLogin />
-                        </Route>
-                        
-                        <div>
-                            {/* <header className="app-header navbar">
+                        </Route> */}
+
+                    <div>
+                        {/* <header className="app-header navbar">
                             <Header />
                         </header> */}
-                            <AppHeader fixed>
-                                <Suspense>
-                                    <Header />
-                                </Suspense>
-                            </AppHeader>
+                        <AppHeader fixed>
+                            <Suspense>
+                                <Header />
+                            </Suspense>
+                        </AppHeader>
 
-                            <div className="app-body">
-                                {/* <div className="sidebar">
+                        <div className="app-body">
+                            {/* <div className="sidebar">
                                 { <Navigation /> }
                                  <Sidebar></Sidebar>
                             </div> */}
-                                <AppSidebar fixed display="lg">
-                                    <AppSidebarHeader />
-                                    <AppSidebarForm />
-                                    <Suspense>
-                                        <AppSidebarNav navConfig={navigation} router={router} />
-                                    </Suspense>
-                                    <AppSidebarFooter />
-                                    <AppSidebarMinimizer />
-                                </AppSidebar>
-                                <main className="main space-allaround">
-                                    {/* A <Switch> looks through its children <Route>s and
+                            <AppSidebar fixed display="lg">
+                                <AppSidebarHeader />
+                                <AppSidebarForm />
+                                <Suspense>
+                                    <AppSidebarNav navConfig={navigation} router={router} />
+                                </Suspense>
+                                <AppSidebarFooter />
+                                <AppSidebarMinimizer />
+                            </AppSidebar>
+                            <main className="main space-allaround">
+                                {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-
+                                <Switch>
 
                                     <Route path="/about">
                                         <About></About>
@@ -106,25 +115,23 @@ class CoreUserInterface extends Component {
                                     <Route path="/users">
                                         <BodyContent />
                                     </Route>
-
-                                    <Route path="/dashboard">
+                                    <Route path="/">
                                         <Homepage></Homepage>
                                     </Route>
 
-                                </main>
+                                </Switch>
+                            </main>
+                        </div>
 
-                            </div>
-
-                            <AppFooter>
+                        <footer className="app-footer">
+                            Giangisoft® - All rights reserved
+                        </footer>
+                        {/* <AppFooter>
                                 <Suspense>
                                     Giangisoft® - All rights reserved
-                            </Suspense>
-                            </AppFooter>
-                            {/* <footer className="app-footer">
-                            Giangisoft® - All rights reserved
-                        </footer> */}
-                        </div>
-                    </Switch>
+                                    </Suspense>
+                            </AppFooter> */}
+                    </div>
                 </Router>
             </div>
         )

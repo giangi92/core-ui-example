@@ -58,7 +58,7 @@ const BodyContent = () => {
             })
                 .then(result => result.json()).then((employees) => {
 
-                    setUsers(employees)
+                    if(employees && (employees.length > 0))setUsers(employees)
                 })
         }, [])
 

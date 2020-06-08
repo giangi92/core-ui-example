@@ -38,7 +38,7 @@ const UserLogin = () => {
     if (goToDashboard) {
         return (
             <div>
-                {/* <Link to="/dashboard" /> */}
+                <Link to="/" />
             </div>
         )
     } else
