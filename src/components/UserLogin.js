@@ -7,6 +7,7 @@ const UserLogin = (userState) => {
     var [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(true);
     const [goToDashboard, setGoToDashboard] = useState(false);
+    
     var [password, setPassword] = useState('');
 
     // if(sessionToken && jwt.verify(sessionToken))
@@ -34,10 +35,11 @@ const UserLogin = (userState) => {
                 } else {
                     localStorage.setItem('sessionToken', data.sessionToken);
                     console.log(data);
-                    const user = new User(data);
-                    localStorage.setItem('user', user);
+                    // const user = new User(data);
+                    localStorage.setItem('user', JSON.stringify(data));
                     setGoToDashboard(true);
                     userState.isLogged(true);
+                    userState.setLoggedUser(data);
                     // console.log(localStorage.getItem("sessionToken"));
                 }
             })
@@ -54,7 +56,7 @@ const UserLogin = (userState) => {
                 <div className='d-flex justify-content-center align-items-center space-allaround'>
                     <h1 className='display-1'>Giangisoft</h1>
                 </div>
-                <p className="center-element">Hai accesso per 30 secondi, dopo di che ritorni qui nella home. Questo per dimostrare che il redirect funge
+                <p className="center-element">Hai accesso per 1 minuto, dopo di che ritorni qui nella home. Questo per dimostrare che il redirect funge
                         <br></br>
                         <br/>
                         account di prova: cicciocappuccio@giangisoft.com <br />

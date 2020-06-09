@@ -66,13 +66,13 @@ const navigation =
 const CoreUserInterface = () => {
 
     const [logged, setLogged] = useState(false);
+    const [loggedUser, setLoggedUser] = useState(undefined);
 
     useEffect(() => {
-        console.log('update del main!!!!');
-        const user = localStorage.getItem('user') || undefined;
+        
         const isCorrect = TokenChecker();
 
-        setLogged(user && isCorrect);
+        setLogged(loggedUser && isCorrect);
     })
 
     return (
@@ -81,12 +81,12 @@ const CoreUserInterface = () => {
                 <div>
                     <AppHeader fixed>
                         <Suspense>
-                            <Header isLogged={logged} />
+                            <Header isLogged={logged} setLogged={setLogged} />
                         </Suspense>
                     </AppHeader>
 
                     <div className="app-body">
-                       
+
                         <AppSidebar fixed display="lg">
                             <AppSidebarHeader />
                             <AppSidebarForm />
@@ -106,7 +106,7 @@ const CoreUserInterface = () => {
                                 </Route>
                                 <Route path="/users">
                                     <TokenCheckerRedirect uri="users"></TokenCheckerRedirect>
-                                    <BodyContent />
+                                    <BodyContent loggedUser={loggedUser}/>
                                 </Route>
 
                                 <Route path="/dashboard">
@@ -115,7 +115,7 @@ const CoreUserInterface = () => {
                                     {/* {setLogged(true)} */}
                                 </Route>
                                 <Route path="/">
-                                    <UserLogin isLogged={setLogged} />
+                                    <UserLogin isLogged={setLogged} setLoggedUser={setLoggedUser} />
                                 </Route>
 
                             </Switch>

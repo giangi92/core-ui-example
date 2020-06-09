@@ -1,11 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{useState} from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import { Nav, NavItem } from 'reactstrap';
 import { AppSidebarToggler } from '@coreui/react';
 import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 
 
 const Header = (user) => {
+
+    const [logOut, setLogout] = useState(false);
+
+    if(logOut){
+        localStorage.removeItem('sessionToken');
+        user.setLogged(false);
+        setLogout(false);
+
+        return (
+            <Redirect to='/'/>
+        )
+    }
 
     return (
         <React.Fragment>
@@ -38,7 +50,7 @@ const Header = (user) => {
                             <img src={'../../assets/img/avatars/100.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                         </DropdownToggle>
                         <DropdownMenu right>
-                            <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Logout</DropdownItem>
+                            <DropdownItem onClick={e => setLogout(true)}><i className="fa fa-lock"></i> Logout</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     :

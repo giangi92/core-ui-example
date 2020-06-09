@@ -6,6 +6,7 @@ import { Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
+import TokenCheckerRedirect from './TokenChecker';
 
 const BodyContent = () => {
     const [employeeData, setEmployeeData] = useState(undefined);
@@ -37,6 +38,22 @@ const BodyContent = () => {
         let gridApi = {};
 
         const [users, setUsers] = useState([]);
+        let loggedUser = localStorage.getItem('user') || undefined;
+        if(loggedUser){
+            loggedUser = JSON.parse(loggedUser);
+        }
+
+        let auth = '';
+        if (loggedUser){
+            console.log("Ciao",loggedUser.name);
+            
+            console.log('l utente è loggato correttamente, accessToken è:',loggedUser.sessionToken);
+            
+            auth = 'JWT ' + loggedUser.sessionToken;
+        }else{
+            console.log('devi ancora loggarti');
+            
+        }
 
         const columnDefs = [{
             headerName: "Name", field: "name", sortable: true, filter: true, checkboxSelection: true, editable: true
@@ -49,17 +66,20 @@ const BodyContent = () => {
         }];
 
         useEffect(() => {
-            fetch('/employees', {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNpY2Npb2NhcHB1Y2Npb0BnaWFuZ2lzb2Z0LmNvbSIsImlhdCI6MTU5MTM3MzY5OSwiZXhwIjoxNTkxMzk4ODk5fQ.JaCifqlV46yeT5BjsRxayqdXSYO1pk2fP2EknjKehQo'
-                }
-            })
-                .then(result => result.json()).then((employees) => {
-
-                    if(employees && (employees.length > 0))setUsers(employees)
+            if (loggedUser) {
+                fetch('/employees', {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': auth
+                    }
                 })
+                    .then(result => result.json()).then((employees) => {
+
+                        if (employees && (employees.length > 0)) setUsers(employees)
+                    })
+            }
+
         }, [])
 
         return (
@@ -178,6 +198,7 @@ const BodyContent = () => {
         <div>
             <h1>Raccolta informazioni dei dipendenti</h1>
             {/** Menu a tab per separare la vecchia lista con la nuova fatta con ag-grid */}
+            <TokenCheckerRedirect uri="users"></TokenCheckerRedirect>
             <Tabs></Tabs>
         </div>
     )
