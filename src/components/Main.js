@@ -104,23 +104,23 @@ const CoreUserInterface = () => {
                                 </UncontrolledDropdown>
                             </React.Fragment> */}
                             {logged ?
-                                <UncontrolledDropdown nav direction="down">
+                                (<UncontrolledDropdown nav direction="down">
                                     <DropdownToggle nav>
                                         <img src={'../../assets/img/avatars/100.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                                     </DropdownToggle>
                                     <DropdownMenu right>
                                         <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Logout</DropdownItem>
                                     </DropdownMenu>
-                                </UncontrolledDropdown>
+                                </UncontrolledDropdown>)
                                 :
-                                <UncontrolledDropdown nav direction="down">
+                                (<UncontrolledDropdown nav direction="down">
                                     <DropdownToggle nav>
                                         <img src={'../../assets/img/avatars/0.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                                     </DropdownToggle>
                                     <DropdownMenu right>
                                         <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Login</DropdownItem>
                                     </DropdownMenu>
-                                </UncontrolledDropdown>
+                                </UncontrolledDropdown>)
                             }
                         </Suspense>
                     </AppHeader>
@@ -155,7 +155,6 @@ const CoreUserInterface = () => {
                                 <Route path="/dashboard">
                                     <TokenCheckerRedirect uri="dashboard"></TokenCheckerRedirect>
                                     <Homepage></Homepage>
-                                    {/* {setLogged(true)} */}
                                 </Route>
                                 <Route path="/">
                                     <UserLogin />

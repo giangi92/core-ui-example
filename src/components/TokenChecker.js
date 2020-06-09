@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import jwt from 'jsonwebtoken';
 
-const TokenCheckerRedirect = (redirectLocation)=>{
+const TokenCheckerRedirect = (redirectLocation) => {
     const sessionToken = localStorage.getItem("sessionToken");
     if (sessionToken) {
         try {
@@ -12,7 +12,7 @@ const TokenCheckerRedirect = (redirectLocation)=>{
             if (isCorrect) {
                 return (
                     <div>
-                        <Redirect to={'/'+redirectLocation.uri} />
+                        <Redirect to={'/' + redirectLocation.uri} />
                     </div>
                 )
             }
@@ -24,10 +24,16 @@ const TokenCheckerRedirect = (redirectLocation)=>{
                 </div>
             )
         }
-    }
+    }else{
+        return (
+            <div>
+                <Redirect to="/" />
+            </div>
+        )
+    }    
 }
 
-const TokenChecker = ()=>{
+const TokenChecker = () => {
     const sessionToken = localStorage.getItem("sessionToken");
     if (sessionToken) {
         try {
@@ -44,4 +50,4 @@ const TokenChecker = ()=>{
     }
 }
 
-export {TokenChecker, TokenCheckerRedirect as default};
+export { TokenChecker, TokenCheckerRedirect as default };
