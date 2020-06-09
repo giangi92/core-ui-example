@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Nav, NavItem } from 'reactstrap';
 import { AppSidebarToggler } from '@coreui/react';
@@ -9,13 +9,17 @@ const Header = (user) => {
 
     const [logOut, setLogout] = useState(false);
 
-    if(logOut){
+    if (logOut) {
+        console.log('Effettuo logout dallo header');
+        
         localStorage.removeItem('sessionToken');
         user.setLogged(false);
         setLogout(false);
 
         return (
-            <Redirect to='/'/>
+            <div>
+                <Redirect to='/' />
+            </div>
         )
     }
 

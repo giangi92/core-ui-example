@@ -6,6 +6,7 @@ import * as router from 'react-router-dom';
 import About from './About';
 import Homepage from './Homepage';
 import UserLogin from './UserLogin';
+import UserRegister from './UserRegister';
 import { Redirect } from 'react-router';
 import {
     AppHeader,
@@ -18,6 +19,7 @@ import {
     AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 import TokenCheckerRedirect, { TokenChecker } from './TokenChecker';
+import { Button } from 'reactstrap';
 
 // sidebar nav config
 
@@ -69,68 +71,94 @@ const CoreUserInterface = () => {
     const [loggedUser, setLoggedUser] = useState(undefined);
 
     useEffect(() => {
-        
-        const isCorrect = TokenChecker();
 
-        setLogged(loggedUser && isCorrect);
+        const isCorrect = TokenChecker();
+        console.log('Utente è loggato?',logged);
+        
+
+        //setLogged(loggedUser && isCorrect);
     })
 
     return (
         <div className="app">
             <Router>
-                <div>
-                    <AppHeader fixed>
-                        <Suspense>
-                            <Header isLogged={logged} setLogged={setLogged} />
-                        </Suspense>
-                    </AppHeader>
+                {logged ?
+                    (
+                        <>
+                            <AppHeader fixed>
+                                <Suspense>
+                                    <Header isLogged={logged} setLogged={setLogged} />
+                                </Suspense>
+                            </AppHeader>
 
-                    <div className="app-body">
+                            <div className="app-body">
 
-                        <AppSidebar fixed display="lg">
-                            <AppSidebarHeader />
-                            <AppSidebarForm />
-                            <Suspense>
-                                <AppSidebarNav navConfig={navigation} router={router} />
-                            </Suspense>
-                            <AppSidebarFooter />
-                            <AppSidebarMinimizer />
-                        </AppSidebar>
-                        <main className="main space-allaround">
-                            {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-                            <Switch>
+                                <AppSidebar fixed display="lg">
+                                    <AppSidebarHeader />
+                                    <AppSidebarForm />
+                                    <Suspense>
+                                        <AppSidebarNav navConfig={navigation} router={router} />
+                                    </Suspense>
+                                    <AppSidebarFooter />
+                                    <AppSidebarMinimizer />
+                                </AppSidebar>
+                                <main className="main space-allaround">
+                                    {/* A <Switch> looks through its children <Route>s and
+                    renders the first one that matches the current URL. */}
+                                    <Switch>
 
-                                <Route path="/about">
-                                    <About></About>
-                                </Route>
-                                <Route path="/users">
-                                    <TokenCheckerRedirect uri="users"></TokenCheckerRedirect>
-                                    <BodyContent loggedUser={loggedUser}/>
-                                </Route>
+                                        <Route path="/about">
+                                            <About></About>
+                                        </Route>
+                                        <Route path="/users">
+                                            <TokenCheckerRedirect uri="users"></TokenCheckerRedirect>
+                                            <BodyContent loggedUser={loggedUser} />
+                                        </Route>
 
-                                <Route path="/dashboard">
-                                    <TokenCheckerRedirect uri="dashboard"></TokenCheckerRedirect>
-                                    <Homepage></Homepage>
-                                    {/* {setLogged(true)} */}
-                                </Route>
-                                <Route path="/">
-                                    <UserLogin isLogged={setLogged} setLoggedUser={setLoggedUser} />
-                                </Route>
+                                        <Route path="/dashboard">
+                                            <TokenCheckerRedirect uri="dashboard"></TokenCheckerRedirect>
+                                            <Homepage></Homepage>
+                                        </Route>
 
-                            </Switch>
-                        </main>
-                    </div>
+                                        <Route path="/">
+                                            <p>Sessione scaduta, rieffettua il login.</p>
+                                            
+                                                <Button onClick={()=>{
+                                                    localStorage.removeItem('sessionToken');
+                                                    setLogged(false);
+                                                    return(<div>
+                                                        <Redirect to='/'></Redirect>
+                                                    </div>)
+                                                }}>Alla login</Button>
+                                        </Route>
+                                        
+                                    </Switch>
+                                </main>
+                            </div>
 
-                    <footer className="app-footer">
-                        Giangisoft® - All rights reserved
-                        </footer>
-                    {/* <AppFooter>
+                            <footer className="app-footer">
+                                Giangisoft® - All rights reserved
+                            </footer>
+                            {/* <AppFooter>
                                 <Suspense>
                                     Giangisoft® - All rights reserved
                                     </Suspense>
                             </AppFooter> */}
-                </div>
+                        </>
+                    )
+                    :
+                    (
+                        <>
+                            <Route path="/register">
+                                <UserRegister />
+                            </Route>
+                            <Route path="/">
+                                <UserLogin isLogged={logged} setLogged={setLogged} setLoggedUser={setLoggedUser} />
+                            </Route>
+                        </>
+                    )
+                }
+
             </Router>
         </div>
     )

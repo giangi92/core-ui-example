@@ -25,6 +25,8 @@ const TokenCheckerRedirect = (redirectLocation) => {
             )
         }
     }else{
+        console.log('Nessun token');
+        
         return (
             <div>
                 <Redirect to="/" />

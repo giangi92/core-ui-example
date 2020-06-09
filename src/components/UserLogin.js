@@ -7,8 +7,17 @@ const UserLogin = (userState) => {
     var [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(true);
     const [goToDashboard, setGoToDashboard] = useState(false);
-    
+
     var [password, setPassword] = useState('');
+    console.log("userState", userState.isLogged);
+    
+    if (userState.isLogged) {
+        return (
+            <div>
+                <Redirect to="/dashboard" />
+            </div>
+        )
+    }
 
     // if(sessionToken && jwt.verify(sessionToken))
     //  return(<Redirect to='/dasboard'></Redirect>)
@@ -38,7 +47,7 @@ const UserLogin = (userState) => {
                     // const user = new User(data);
                     localStorage.setItem('user', JSON.stringify(data));
                     setGoToDashboard(true);
-                    userState.isLogged(true);
+                    userState.setLogged(true);
                     userState.setLoggedUser(data);
                     // console.log(localStorage.getItem("sessionToken"));
                 }
@@ -58,7 +67,7 @@ const UserLogin = (userState) => {
                 </div>
                 <p className="center-element">Hai accesso per 1 minuto, dopo di che ritorni qui nella home. Questo per dimostrare che il redirect funge
                         <br></br>
-                        <br/>
+                    <br />
                         account di prova: cicciocappuccio@giangisoft.com <br />
                         pass:password
                     </p>
@@ -106,7 +115,9 @@ const UserLogin = (userState) => {
                                                 <h2>Sign up</h2>
                                                 <p>Registrati nella tua magnifica piattaforma dove puoi giudicare i tuoi dipendenti e, volendo, licenziarli senza nessun motivo</p>
                                                 <Link to="/register">
-                                                    <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>
+                                                    <Button color="primary" className="mt-3" active>
+                                                        Register Now!
+                                                    </Button>
                                                 </Link>
                                             </div>
                                         </CardBody>
