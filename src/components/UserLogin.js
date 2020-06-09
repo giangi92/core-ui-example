@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import User from '../models/User';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
-const UserLogin = () => {
+const UserLogin = (userState) => {
     var [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(true);
     const [goToDashboard, setGoToDashboard] = useState(false);
@@ -37,6 +37,7 @@ const UserLogin = () => {
                     const user = new User(data);
                     localStorage.setItem('user', user);
                     setGoToDashboard(true);
+                    userState.isLogged(true);
                     // console.log(localStorage.getItem("sessionToken"));
                 }
             })
@@ -53,9 +54,8 @@ const UserLogin = () => {
                 <div className='d-flex justify-content-center align-items-center space-allaround'>
                     <h1 className='display-1'>Giangisoft</h1>
                 </div>
-                <p className="center-element">Hai accesso per 20 secondi, dopo di che ritorni qui nella home
+                <p className="center-element">Hai accesso per 30 secondi, dopo di che ritorni qui nella home. Questo per dimostrare che il redirect funge
                         <br></br>
-                        Tra i difetti c'è il fatto che l'avatar si aggiorna solo con un refresh completo della pagina.
                         <br/>
                         account di prova: cicciocappuccio@giangisoft.com <br />
                         pass:password

@@ -18,8 +18,6 @@ import {
     AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 import TokenCheckerRedirect, { TokenChecker } from './TokenChecker';
-import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
-
 
 // sidebar nav config
 
@@ -80,56 +78,15 @@ const CoreUserInterface = () => {
     return (
         <div className="app">
             <Router>
-                {/* {!sessionStatus || (sessionStatus && jwt.verify(sessionStatus))}
-                    <Redirect to='/login'></Redirect> */}
-                {/* <Route path="/login">
-                            <UserLogin />
-                        </Route> */}
-
                 <div>
-                    {/* <header className="app-header navbar">
-                            <Header />
-                        </header> */}
                     <AppHeader fixed>
                         <Suspense>
-                            <Header />
-                            {/* <React.Fragment>
-                                <UncontrolledDropdown nav direction="down">
-                                    <DropdownToggle nav>
-                                        <img src={'../../assets/img/avatars/100.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                                    </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Logout</DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                            </React.Fragment> */}
-                            {logged ?
-                                (<UncontrolledDropdown nav direction="down">
-                                    <DropdownToggle nav>
-                                        <img src={'../../assets/img/avatars/100.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                                    </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Logout</DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>)
-                                :
-                                (<UncontrolledDropdown nav direction="down">
-                                    <DropdownToggle nav>
-                                        <img src={'../../assets/img/avatars/0.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                                    </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem onClick={e => null}><i className="fa fa-lock"></i> Login</DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>)
-                            }
+                            <Header isLogged={logged} />
                         </Suspense>
                     </AppHeader>
 
                     <div className="app-body">
-                        {/* <div className="sidebar">
-                                { <Navigation /> }
-                                 <Sidebar></Sidebar>
-                            </div> */}
+                       
                         <AppSidebar fixed display="lg">
                             <AppSidebarHeader />
                             <AppSidebarForm />
@@ -155,9 +112,10 @@ const CoreUserInterface = () => {
                                 <Route path="/dashboard">
                                     <TokenCheckerRedirect uri="dashboard"></TokenCheckerRedirect>
                                     <Homepage></Homepage>
+                                    {/* {setLogged(true)} */}
                                 </Route>
                                 <Route path="/">
-                                    <UserLogin />
+                                    <UserLogin isLogged={setLogged} />
                                 </Route>
 
                             </Switch>
