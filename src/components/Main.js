@@ -81,9 +81,9 @@ const CoreUserInterface = () => {
 
     return (
         <div>
-            <Router>
-                {logged ?
-                    (
+            {logged ?
+                (
+                    <Router>
                         <div className="app">
                             <AppHeader fixed>
                                 <Suspense>
@@ -151,21 +151,26 @@ const CoreUserInterface = () => {
                             </footer> */}
 
                         </div>
-                    )
-                    :
-                    (
+                    </Router>
+                )
+                :
+                (
+                    <Router>
                         <>
-                            <Route path="/register">
-                                <UserRegister />
-                            </Route>
-                            <Route path="/">
-                                <UserLogin isLogged={logged} setLogged={setLogged} setLoggedUser={setLoggedUser} />
-                            </Route>
+                            <Switch>
+                                <Route path="/register">
+                                    <UserRegister />
+                                </Route>
+                                <Route path="/">
+                                    <UserLogin isLogged={logged} setLogged={setLogged} setLoggedUser={setLoggedUser} />
+                                </Route>
+                            </Switch>
                         </>
-                    )
-                }
+                    </Router>
+                )
+            }
 
-            </Router>
+
         </div>
     )
 }

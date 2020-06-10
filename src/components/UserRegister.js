@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import logo from '../../src/assets/img/logo/imole-logo.png';
 
 import { Alert, Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
@@ -67,75 +68,82 @@ const UserRegister = () => {
     )
   } else {
     return (
-      <div className="app flex-row align-items-center">
+      <div>
+        <div className='d-flex justify-content-center align-items-center space-allaround'>
+          {/* <h1 className='display-1'>Giangisoft</h1> */}
+          <img src={logo} alt="Imole-logo"></img>
+        </div>
+        <div className="flex-row align-items-center">
 
-        <Container>
-          {showAlert && <Alert variant="success">Registrazione avvenuta con successo. Reindirizzamento in corso...</Alert>}
-          <Row className="justify-content-center">
-            <Col md="9" lg="7" xl="6">
-              <Card className="mx-4">
-                <CardBody className="p-4">
-                  <Form onSubmit={(e) => submitCredentials(e)}>
-                    <h1>Register</h1>
-                    <p className="text-muted">Create your account</p>
-                    <InputGroup className="mb-3">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="icon-user"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="icon-user"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input type="text" placeholder="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} autoComplete="surname" />
-                    </InputGroup>
-                    {!validEmail && <p className="red-border">Email già in uso</p>}
-                    <InputGroup className="mb-3">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>@</InputGroupText>
-                      </InputGroupAddon>
-                      <Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="icon-lock"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
-                    </InputGroup>
-                    {!validPassword && <p className="red-border">Password non coincidono</p>}
-                    <InputGroup className="mb-4">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="icon-lock"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input type="password" placeholder="Repeat password" value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} autoComplete="new-password" />
-                    </InputGroup>
-                    <Button color="success" block>Create Account</Button>
-                  </Form>
-                </CardBody>
-                <CardFooter className="p-4">
-                  <Row>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-facebook mb-1" block><span>facebook</span></Button>
-                    </Col>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-twitter mb-1" block><span>twitter</span></Button>
-                    </Col>
-                  </Row>
-                </CardFooter>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
+          <Container>
+            {showAlert && <Alert variant="success">Registrazione avvenuta con successo. Reindirizzamento in corso...</Alert>}
+            <Row className="justify-content-center">
+              <Col md="9" lg="7" xl="6">
+                <Card className="mx-4">
+                  <CardBody className="p-4">
+                    <Form onSubmit={(e) => submitCredentials(e)}>
+                      <h1>Register</h1>
+                      <p className="text-muted">Create your account</p>
+                      <InputGroup className="mb-3">
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <i className="icon-user"></i>
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
+                      </InputGroup>
+                      <InputGroup className="mb-3">
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <i className="icon-user"></i>
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input type="text" placeholder="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} autoComplete="surname" />
+                      </InputGroup>
+                      {!validEmail && <p className="red-border">Email già in uso</p>}
+                      <InputGroup className="mb-3">
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>@</InputGroupText>
+                        </InputGroupAddon>
+                        <Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+                      </InputGroup>
+                      <InputGroup className="mb-3">
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <i className="icon-lock"></i>
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
+                      </InputGroup>
+                      {!validPassword && <p className="red-border">Password non coincidono</p>}
+                      <InputGroup className="mb-4">
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <i className="icon-lock"></i>
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input type="password" placeholder="Repeat password" value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} autoComplete="new-password" />
+                      </InputGroup>
+                      <Button color="success" block>Create Account</Button>
+                    </Form>
+                  </CardBody>
+                  <CardFooter className="p-4">
+                    <Row>
+                      <Col xs="12" sm="6">
+                        <Button className="btn-facebook mb-1" block><span>facebook</span></Button>
+                      </Col>
+                      <Col xs="12" sm="6">
+                        <Button className="btn-twitter mb-1" block><span>twitter</span></Button>
+                      </Col>
+                    </Row>
+                  </CardFooter>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </div>
+
     );
   }
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import User from '../models/User';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import logo from '../../src/assets/img/logo/imole-logo.png';
+import { AppNavbarBrand } from '@coreui/react';
 
 const UserLogin = (userState) => {
     var [email, setEmail] = useState('');
@@ -10,7 +12,7 @@ const UserLogin = (userState) => {
 
     var [password, setPassword] = useState('');
     console.log("userState", userState.isLogged);
-    
+
     if (userState.isLogged) {
         return (
             <div>
@@ -63,15 +65,10 @@ const UserLogin = (userState) => {
         return (
             <div>
                 <div className='d-flex justify-content-center align-items-center space-allaround'>
-                    <h1 className='display-1'>Giangisoft</h1>
+                    {/* <h1 className='display-1'>Giangisoft</h1> */}
+                    <img src={logo} alt="Imole-logo"></img>
                 </div>
-                <p className="center-element">Hai accesso per 1 minuto, dopo di che ritorni qui nella home. Questo per dimostrare che il redirect funge
-                        <br></br>
-                    <br />
-                        account di prova: cicciocappuccio@giangisoft.com <br />
-                        pass:password
-                    </p>
-                <div className="app flex-row align-items-center">
+                <div className="align-items-center">
                     <Container>
                         <Row className="justify-content-center">
                             <Col md="8">
@@ -113,7 +110,7 @@ const UserLogin = (userState) => {
                                         <CardBody className="text-center">
                                             <div>
                                                 <h2>Sign up</h2>
-                                                <p>Registrati nella tua magnifica piattaforma dove puoi giudicare i tuoi dipendenti e, volendo, licenziarli senza nessun motivo</p>
+                                                <p>Registrati ad I-Mole</p>
                                                 <Link to="/register">
                                                     <Button color="primary" className="mt-3" active>
                                                         Register Now!
