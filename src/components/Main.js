@@ -67,14 +67,14 @@ const navigation =
 
 const CoreUserInterface = () => {
 
-    const [logged, setLogged] = useState(false);
+    const [logged, setLogged] = useState(TokenChecker());
     const [loggedUser, setLoggedUser] = useState(undefined);
 
     useEffect(() => {
 
         const isCorrect = TokenChecker();
-        console.log('Utente è loggato?',logged);
-        
+        console.log('Utente è loggato?', logged);
+
 
         //setLogged(loggedUser && isCorrect);
     })
@@ -122,28 +122,29 @@ const CoreUserInterface = () => {
 
                                         <Route path="/">
                                             <p>Sessione scaduta, rieffettua il login.</p>
-                                            
-                                                <Button onClick={()=>{
-                                                    localStorage.removeItem('sessionToken');
-                                                    setLogged(false);
-                                                    return(<div>
-                                                        <Redirect to='/'></Redirect>
-                                                    </div>)
-                                                }}>Alla login</Button>
+
+                                            <Button onClick={() => {
+                                                localStorage.removeItem('sessionToken');
+                                                setLogged(false);
+                                                return (<div>
+                                                    <Redirect to='/'></Redirect>
+                                                </div>)
+                                            }}>Alla login</Button>
                                         </Route>
-                                        
+
                                     </Switch>
                                 </main>
                             </div>
 
-                            <footer className="app-footer">
+                            {/* <footer className="app-footer">
                                 Giangisoft® - All rights reserved
-                            </footer>
+                            </footer> */}
                             {/* <AppFooter>
                                 <Suspense>
                                     Giangisoft® - All rights reserved
-                                    </Suspense>
+                                </Suspense>
                             </AppFooter> */}
+
                         </>
                     )
                     :
