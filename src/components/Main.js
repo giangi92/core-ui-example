@@ -80,11 +80,11 @@ const CoreUserInterface = () => {
     })
 
     return (
-        <div className="app">
+        <div>
             <Router>
                 {logged ?
                     (
-                        <>
+                        <div className="app">
                             <AppHeader fixed>
                                 <Suspense>
                                     <Header isLogged={logged} setLogged={setLogged} />
@@ -134,18 +134,23 @@ const CoreUserInterface = () => {
 
                                     </Switch>
                                 </main>
+
+                            </div>
+                            <div>
+                                <Suspense>
+                                    <AppFooter>
+                                        <Suspense>
+                                            Giangisoft® - All rights reserved
+                                        </Suspense>
+                                    </AppFooter>
+                                </Suspense>
                             </div>
 
                             {/* <footer className="app-footer">
                                 Giangisoft® - All rights reserved
                             </footer> */}
-                            {/* <AppFooter>
-                                <Suspense>
-                                    Giangisoft® - All rights reserved
-                                </Suspense>
-                            </AppFooter> */}
 
-                        </>
+                        </div>
                     )
                     :
                     (
