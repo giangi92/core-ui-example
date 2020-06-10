@@ -1,17 +1,81 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Alert, Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
-const UserRegister = ()=> {
+const UserRegister = () => {
+
+  var [name, setName] = useState('');
+  var [surname, setSurname] = useState('');
+  var [email, setEmail] = useState('');
+  var [password, setPassword] = useState('');
+  var [retypePassword, setRetypePassword] = useState('');
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPassword, setValidPassword] = useState(true);
+  const [goToLogin, setGoToLogin] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
+
+  const submitCredentials = (e) => {
+    e.preventDefault();
+    console.log('email inserita?', email);
+    setValidEmail(true);
+    setValidPassword(true);
+    setShowAlert(false);
+
+    if (password !== retypePassword) {
+      setValidPassword(false);
+      return;
+    }
+
+    // setEmail(event)
+    // console.log("current email:",email)
+    fetch("/user/register",
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, surname, email, password })
+      })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.error) {
+          setValidEmail(false);
+          console.log('Errore: ' + data.error.message, validEmail)
+        } else {
+
+          console.log(data);
+          // const user = new User(data);
+          localStorage.setItem('user', JSON.stringify(data));
+          setShowAlert(true);
+          setTimeout(() => {
+
+            setGoToLogin(true);
+          }, 3000)
+          //alert('Registrato nuovo utente: ' + data.name + '. Effettua l`accesso');
+          // console.log(localStorage.getItem("sessionToken"));
+        }
+      })
+  }
+
+  if (goToLogin) {
+    return (
+      <div>
+        <Redirect to="/dashboard" />
+      </div>
+    )
+  } else {
     return (
       <div className="app flex-row align-items-center">
+
         <Container>
+          {showAlert && <Alert variant="success">Registrazione avvenuta con successo. Reindirizzamento in corso...</Alert>}
           <Row className="justify-content-center">
             <Col md="9" lg="7" xl="6">
               <Card className="mx-4">
                 <CardBody className="p-4">
-                  <Form>
+                  <Form onSubmit={(e) => submitCredentials(e)}>
                     <h1>Register</h1>
                     <p className="text-muted">Create your account</p>
                     <InputGroup className="mb-3">
@@ -20,13 +84,22 @@ const UserRegister = ()=> {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Username" autoComplete="username" />
+                      <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
                     </InputGroup>
+                    <InputGroup className="mb-3">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="icon-user"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input type="text" placeholder="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} autoComplete="surname" />
+                    </InputGroup>
+                    {!validEmail && <p className="red-border">Email già in uso</p>}
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Email" autoComplete="email" />
+                      <Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -34,15 +107,16 @@ const UserRegister = ()=> {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Password" autoComplete="new-password" />
+                      <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
                     </InputGroup>
+                    {!validPassword && <p className="red-border">Password non coincidono</p>}
                     <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Repeat password" autoComplete="new-password" />
+                      <Input type="password" placeholder="Repeat password" value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} autoComplete="new-password" />
                     </InputGroup>
                     <Button color="success" block>Create Account</Button>
                   </Form>
@@ -63,6 +137,7 @@ const UserRegister = ()=> {
         </Container>
       </div>
     );
+  }
 }
 
 export default UserRegister;

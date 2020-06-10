@@ -152,6 +152,40 @@ app.post('/user/login', (req, res) => {
 
 })
 
+app.post('/user/register', (req, res) => {
+
+  const user = req.body;
+  User.findOne({ email: user.email }, (err, resp) => {
+    if (err) {
+      res.status(404).send('Error', err);
+    }
+
+    if (resp) {
+      let dbuser = resp;
+      console.log('Email già presente', dbuser);
+      res.status(409).send({error:{message:'Email già in uso.'}})
+      
+    } else {
+      //altrimenti non ho trovato nessuno e posso procedere con la registrazione
+      User.create({
+        name:user.name,
+        surname:user.surname,
+        email:user.email,
+        password:user.password,
+        sessionToken: jwt.sign({ email: user.email }, 'secret', { expiresIn: '1 minute' })
+      },(insertErr, insertRes)=>{
+        if(insertErr){
+          console.log(insertErr);
+          res.status(500).send(insertErr);
+        }
+        res.status(200).send(insertRes);
+      })
+    }
+
+  })
+
+})
+
 app.post('/employees/generaterandom/:number', (req, res) => {
   try {
 
