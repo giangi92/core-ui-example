@@ -123,7 +123,7 @@ const CoreUserInterface = () => {
                                         </Route>
 
                                         <Route path="/userInfo">
-                                            <TokenCheckerRedirect uri="dashboard"></TokenCheckerRedirect>
+                                            <TokenCheckerRedirect uri="userInfo"></TokenCheckerRedirect>
                                             <UserInfo info={loggedUser}></UserInfo>
                                         </Route>
 
