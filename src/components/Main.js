@@ -7,6 +7,7 @@ import About from './About';
 import Homepage from './Homepage';
 import UserLogin from './UserLogin';
 import UserRegister from './UserRegister';
+import UserInfo from './UserInfo';
 import { Redirect } from 'react-router';
 import {
     AppHeader,
@@ -87,7 +88,7 @@ const CoreUserInterface = () => {
                         <div className="app">
                             <AppHeader fixed>
                                 <Suspense>
-                                    <Header isLogged={logged} setLogged={setLogged} />
+                                    <Header isLogged={logged} setLogged={setLogged} userInfo = {loggedUser} />
                                 </Suspense>
                             </AppHeader>
 
@@ -118,6 +119,11 @@ const CoreUserInterface = () => {
                                         <Route path="/dashboard">
                                             <TokenCheckerRedirect uri="dashboard"></TokenCheckerRedirect>
                                             <Homepage></Homepage>
+                                        </Route>
+
+                                        <Route path="/userInfo">
+                                            <TokenCheckerRedirect uri="dashboard"></TokenCheckerRedirect>
+                                            <UserInfo info={loggedUser}></UserInfo>
                                         </Route>
 
                                         <Route path="/">

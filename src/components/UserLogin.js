@@ -47,10 +47,10 @@ const UserLogin = (userState) => {
                     localStorage.setItem('sessionToken', data.sessionToken);
                     console.log(data);
                     // const user = new User(data);
+                    userState.setLoggedUser(data);
                     localStorage.setItem('user', JSON.stringify(data));
                     setGoToDashboard(true);
                     userState.setLogged(true);
-                    userState.setLoggedUser(data);
                     // console.log(localStorage.getItem("sessionToken"));
                 }
             })

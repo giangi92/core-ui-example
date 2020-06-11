@@ -8,10 +8,11 @@ import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from
 const Header = (user) => {
 
     const [logOut, setLogout] = useState(false);
+    const loggedUser = user.userInfo;
 
     if (logOut) {
         console.log('Effettuo logout dallo header');
-        
+
         localStorage.removeItem('sessionToken');
         user.setLogged(false);
         setLogout(false);
@@ -54,6 +55,9 @@ const Header = (user) => {
                             <img src={'../../assets/img/avatars/100.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                         </DropdownToggle>
                         <DropdownMenu right>
+                            <Link to='/userInfo'>
+                                <DropdownItem><i className="fa fa-user"></i> {loggedUser.name} {loggedUser.surname}</DropdownItem>
+                            </Link>
                             <DropdownItem onClick={e => setLogout(true)}><i className="fa fa-lock"></i> Logout</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
