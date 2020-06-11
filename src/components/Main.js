@@ -69,16 +69,17 @@ const navigation =
 const CoreUserInterface = () => {
 
     const [logged, setLogged] = useState(TokenChecker());
-    const [loggedUser, setLoggedUser] = useState(undefined);
+    let [loggedUser, setLoggedUser] = useState(undefined);
 
     useEffect(() => {
 
         const isCorrect = TokenChecker();
         console.log('Utente è loggato?', logged);
 
+        setLoggedUser(JSON.parse(localStorage.getItem('user')));
 
         //setLogged(loggedUser && isCorrect);
-    })
+    },[logged])
 
     return (
         <div>

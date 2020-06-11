@@ -8,7 +8,11 @@ import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from
 const Header = (user) => {
 
     const [logOut, setLogout] = useState(false);
-    const loggedUser = user.userInfo;
+    let loggedUser = user.userInfo;
+
+    if(!loggedUser){
+        loggedUser = JSON.parse(localStorage.getItem('user'));
+    }
 
     if (logOut) {
         console.log('Effettuo logout dallo header');
