@@ -172,7 +172,7 @@ app.post('/user/register', (req, res) => {
         surname:user.surname,
         email:user.email,
         password:user.password,
-        sessionToken: jwt.sign({ email: user.email }, 'secret', { expiresIn: '1 minute' })
+        sessionToken: jwt.sign({ email: user.email }, 'secret', { expiresIn: '7 days' })
       },(insertErr, insertRes)=>{
         if(insertErr){
           console.log(insertErr);

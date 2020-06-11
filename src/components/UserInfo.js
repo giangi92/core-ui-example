@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap';
+import { Card, CardBody, CardHeader, Container, Row, Table, Button } from 'reactstrap';
 
 const UserInfo = (user) => {
 
@@ -9,12 +9,12 @@ const UserInfo = (user) => {
 
     return (
         <div>
-            <div className="container">
+            <div className="container-fluid">
                 <div className="row">
-                    <div className="col">
-                        <img src={'../../assets/img/avatars/100.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                    <div className="col-md-4">
+                        <img src={'../../assets/img/avatars/100.png'} className="img-avatar center-element-fb" alt="admin@bootstrapmaster.com" />
                     </div>
-                    <div className="col-6">
+                    <div className="col-md-8">
                         {/* <p>Informazioni sull'utente</p>
                         <h3>{user.info.name} {user.info.surname}</h3>
                         <div className="row">>
@@ -44,7 +44,7 @@ const UserInfo = (user) => {
                                         </tr>
                                         <tr>
                                             <td>Password</td>
-                                            <td><strong>{user.info.password}</strong><Button>Modifica</Button></td>
+                                            <td><strong>{user.info.password}</strong> <Button> Modifica</Button></td>
                                         </tr>
                                     </tbody>
                                 </Table>
@@ -53,7 +53,6 @@ const UserInfo = (user) => {
                     </div>
                 </div>
             </div>
-
 
         </div>
     )
