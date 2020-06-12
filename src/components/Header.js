@@ -10,7 +10,7 @@ const Header = (user) => {
     const [logOut, setLogout] = useState(false);
     let loggedUser = user.userInfo;
 
-    if(!loggedUser){
+    if (!loggedUser) {
         loggedUser = JSON.parse(localStorage.getItem('user'));
     }
 
