@@ -32,7 +32,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.16",
     "mongose": "0.0.2-security",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "prop-types": "^15.7.2",
